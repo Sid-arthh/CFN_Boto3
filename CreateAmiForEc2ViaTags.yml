@@ -14,10 +14,8 @@ Resources:
               tag_key = 'your-tag-key'
               tag_value = 'your-tag-value'
 
-              # Create an EC2 client using the credentials from the IAM role
               ec2_client = boto3.client('ec2')
 
-              # Get the EC2 instances based on the specified tag
               response = ec2_client.describe_instances(Filters=[
                   {
                       'Name': 'tag:' + tag_key,
@@ -25,9 +23,7 @@ Resources:
                   }
               ])
 
-              # Check if instances were found
               if 'Reservations' in response and response['Reservations']:
-                  # Extract the instance ID
                   instance_id = response['Reservations'][0]['Instances'][0]['InstanceId']
 
                   # Create an AMI of the instance with a unique name using timestamp
@@ -41,7 +37,6 @@ Resources:
                       NoReboot=True
                   )
 
-                  # Print the newly created AMI ID
                   ami_id = response['ImageId']
                   print('AMI created with ID:', ami_id)
               else:
