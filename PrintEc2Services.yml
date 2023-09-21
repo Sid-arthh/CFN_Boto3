@@ -45,7 +45,7 @@ Resources:
 
 
       Handler: index.lambda_handler
-      Role: !Ref LambdaExecutionRole
+      Role: !GetAtt LambdaExecutionRole.Arn
       Runtime: python3.10
 
   LambdaExecutionRole:
